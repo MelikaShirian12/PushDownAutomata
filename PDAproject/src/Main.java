@@ -44,7 +44,7 @@ public class Main {
         Stack <String> stack = new Stack<>();
 
         String result = "";
-        stack.push("zero");
+        stack.push("$");
 
         if (n > 0) {
             stack.push("a");
@@ -53,7 +53,7 @@ public class Main {
                 stack.push("a");
             }
         }
-        if (m >0 ){
+        if (m > 0 ){
 
             result += stack.pop();
             stack.push("b");
@@ -62,7 +62,10 @@ public class Main {
                 stack.push("b");
                 result += stack.peek();
             }
-        }
+        }else
+            result += stack.pop();
+
+
 
         return result;
     }
