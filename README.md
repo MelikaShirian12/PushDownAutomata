@@ -1,7 +1,17 @@
-# PushDownAutomata
+<div dir='rtl' align="center">
+             
+</br>   
+     <h2>-- UNIVERSITY OF ISFAHAN --</h2>
+<h3>LANGUAGES AND AUTOMATA THEORY COURSE</h3>
+              <h3>AUTHORS:</h3>
+          <h3>MELIKA  SHIRIAN</h3>
+          <h3>ZAHRA   MASOUMI</h3>
+          <h3>KIANOOSH VADAEI</h3>
+</div>
 
 
 <h3> 🔴 for language { a^n b^m c^m : n,m >= 0 } </h3>
+</br>
 
                                                     a , a ➝ a                b , λ ➝ b              c , b ➝ λ
                                                       ┌---┐                    ┌---┐                   ┌---┐
@@ -18,20 +28,4 @@
                                                        │                      ┌────┐                      │
                                                        └--------------------⟶│ q5 │⟵----------=---------┘
                                                               a , a ➝ λ      └────┘      λ , $ ➝ $
-                                                              
-             
-<div dir='rtl' align="center">
-             
-</br>   
-     -- UNIVERSITY OF ISFAHAN --
-</br>
-LANGUAGES AND AUTOMATA THEORY COURSE
-</br>
-              AUTHORS:
-</br>
-          MELIKA  SHIRIAN
-</br>
-          ZAHRA   MASOUMI
-</br>
-          KIANOOSH VADAEI
-</div>
+                                                             
