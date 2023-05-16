@@ -1,7 +1,7 @@
 <div dir='rtl' align="center">
              
 </br>   
-     <h2>-- UNIVERSITY OF ISFAHAN --</h2>
+     <h2>🟦 UNIVERSITY OF ISFAHAN 🟦</h2>
 <h3>LANGUAGES AND AUTOMATA THEORY COURSE</h3>
               <h3>AUTHORS:</h3>
           <h3>MELIKA  SHIRIAN</h3>
