@@ -129,7 +129,7 @@ public class Main {
                                                        │                      ┌────┐                      │
                                                        └---------------------⟶│ q5 │⟵---------------------┘
                                                               a , a ➝ λ      └────┘      λ , $ ➝ $
-
+                                                                            Final state
 
      -- UNIVERSITY OF ISFAHAN --
 LANGUAGES AND AUTOMATA THEORY COURSE
