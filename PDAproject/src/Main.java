@@ -1,5 +1,3 @@
-import java.awt.*;
-import java.io.Console;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -9,18 +7,18 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         String cmd = "default";
-        while(!cmd.equals("Exit"))
-        {
-            System.out.printf("Select the command\n1) String generator\n2) String Checker\n-> ");
+
+        while (!cmd.equals("Exit")) {
+            System.out.print("Select the command\n1) String generator\n2) String Checker\n-> ");
+
             cmd = sc.nextLine();
             String input;
-            switch (cmd)
-            {
-                case "1":
+
+            switch (cmd) {
+                case "1" -> {
                     input = "default";
-                    while(!input.equals("Back"))
-                    {
-                        System.out.printf("\u001B[36m" + "Enter the m and n or \"back\" to return to menu -> " + "\u001B[0m");
+                    while (!input.equals("Back")) {
+                        System.out.print("\u001B[36m" + "Enter the m and n seperated with ',' ; or \"back\" to return to menu -> " + "\u001B[0m");
                         input = sc.nextLine();
 
                         String[] arguments = input.split(",");
@@ -32,87 +30,119 @@ public class Main {
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
-
-
                     }
-                    break;
-                case "2":
+                }
+
+                case "2" -> {
                     input = "default";
-                    while(!input.equals("Back"))
-                    {
-                        System.out.printf("\u001B[35m" + "Enter the string or \"back\" to return to menu -> " + "\u001B[0m");
+                    while (!input.equals("Back")) {
+                        System.out.print("\u001B[35m" + "Enter the string or \"back\" to return to menu -> " + "\u001B[0m");
                         input = sc.nextLine();
 
                         try {
-
-
+                            if (PushDownAutomaton.accept(input))
+                                System.out.println("\u001B[35m" + "The result is: " + "\u001B[0m" + "\u001B[36m" +
+                                        "The automata accepts this string" + "\u001B[0m");
+                            else
+                                System.out.println("\u001B[35m" + "The result is: " + "\u001B[0m" + "\u001B[36m" +
+                                        "The automata rejects this string" + "\u001B[0m");
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
                     }
-                    break;
-                default:
-                    break;
+                }
             }
 
-
-            System.out.printf("\nSelect the command\n1) String generator\n2) String Checker\n-> ");
+            System.out.print("\nSelect the command\n1) String generator\n2) String Checker\n-> ");
             cmd = sc.nextLine();
-
 
         }
 
     }
 
+    public static String stringGenerator(int n, int m) throws Exception {
+        Stack<String> stack = new Stack<>();
 
-    public static String stringGenerator(int n , int m) throws Exception{
-        Stack <String> stack = new Stack<>();
-
-        String result = "";
+        StringBuilder result = new StringBuilder();
         stack.push("$");
 
-        if (n > 0)
-        {
+        if (n > 0) {
             stack.push("a");
-            for (int i = 0; i < n-1 ; ++i)
-            {
-                result += stack.pop();
+            for (int i = 0; i < n - 1; ++i) {
+                result.append(stack.pop());
                 stack.push("a");
             }
         }
-        if (m > 0 )
-        {
+        if (m > 0) {
 
-            result += stack.pop();
+            result.append(stack.pop());
             stack.push("b");
 
-            for (int i = 0; i < m-1 ; ++i)
-            {
+            for (int i = 0; i < m - 1; ++i) {
                 stack.push("b");
-                result += stack.peek();
+                result.append(stack.peek());
             }
 
-            result += stack.pop();
-            result += "c";
+            result.append(stack.pop());
+            result.append("c");
 
-            for(int i = 0 ; i < m-1 ; ++i)
-            {
+            for (int i = 0; i < m - 1; ++i) {
                 stack.pop();
-                result += "c";
+                result.append("c");
             }
 
 
-        }else
-            result += stack.pop();
+        } else
+            result.append(stack.pop());
 
 
-        if(! stack.pop().equals("$"))
+        if (!stack.pop().equals("$"))
             throw new Exception("Something went wrong !");
 
-        return result;
+        return result.toString();
     }
 }
 
+class PushDownAutomaton {
+    public static boolean accept(String input) {
+        Stack<Character> stack = new Stack<>();
+
+        if (!input.startsWith("a")) return false;
+
+        stack.push('a');
+        int i = 1;
+        while (i < input.length()) {
+            char ch = input.charAt(i);
+
+            if (stack.isEmpty()) return false;
+
+            if (ch == 'a' && stack.peek() == 'a') {
+                i++;
+
+            } else if (ch == 'b') {
+
+                if (stack.peek() == 'a') {
+                    stack.pop();
+                    stack.push(ch);
+                    i++;
+                } else if (stack.peek() == 'b') {
+                    stack.push(ch);
+                    i++;
+                } else return false;
+
+            } else if (ch == 'c') {
+
+                if (stack.peek() != 'b') return false;
+
+                stack.pop();
+                i++;
+
+            } else return false;
+        }
+
+        return stack.isEmpty();
+    }
+}
 
 /*
                                                     a , a ➝ a                b , λ ➝ b              c , b ➝ λ
@@ -125,7 +155,7 @@ public class Main {
                                 │                      │                        ⬆                         │
                                 │                      │                        │                         │
                                 └----------------------│------------------------┘                         │
-                                                       │       b, λ ➝ b                                  │
+                                                       │       b, λ ➝ b                                   │
                                                        │                                                  │
                                                        │                      ┌────┐                      │
                                                        └---------------------⟶│ q5 │⟵---------------------┘
