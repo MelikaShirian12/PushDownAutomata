@@ -17,7 +17,7 @@ public class Main {
             switch (cmd) {
                 case "1" -> {
                     input = "default";
-                    while (!input.equals("Back")) {
+                    while (!input.equals("back")) {
                         System.out.print("\u001B[36m" + "Enter the m and n seperated with ',' ; or \"back\" to return to menu -> " + "\u001B[0m");
                         input = sc.nextLine();
 
@@ -35,7 +35,7 @@ public class Main {
 
                 case "2" -> {
                     input = "default";
-                    while (!input.equals("Back")) {
+                    while (!input.equals("back")) {
                         System.out.print("\u001B[35m" + "Enter the string or \"back\" to return to menu -> " + "\u001B[0m");
                         input = sc.nextLine();
 
@@ -107,40 +107,46 @@ class PushDownAutomaton {
     public static boolean accept(String input) {
         Stack<Character> stack = new Stack<>();
 
-        if (!input.startsWith("a")) return false;
-
-        stack.push('a');
-        int i = 1;
+        int i = 0;
         while (i < input.length()) {
             char ch = input.charAt(i);
 
-            if (stack.isEmpty()) return false;
-
-            if (ch == 'a' && stack.peek() == 'a') {
+            if (ch == 'a') {
+                if (stack.isEmpty())
+                    stack.push(ch);
                 i++;
 
             } else if (ch == 'b') {
 
-                if (stack.peek() == 'a') {
+                if (stack.isEmpty()) {
+                    stack.push(ch);
+                    i++;
+
+                } else if (stack.peek() == 'a') {
                     stack.pop();
                     stack.push(ch);
                     i++;
-                } else if (stack.peek() == 'b') {
+
+                } else if (!stack.isEmpty() && stack.peek() == 'b') {
                     stack.push(ch);
                     i++;
+
                 } else return false;
 
             } else if (ch == 'c') {
 
-                if (stack.peek() != 'b') return false;
+                if (!stack.isEmpty() && stack.peek() == 'b') {
+                    stack.pop();
+                    i++;
 
-                stack.pop();
-                i++;
+                } else return false;
 
             } else return false;
+
+            if (stack.isEmpty() && i != input.length()) return false;
         }
 
-        return stack.isEmpty();
+        return stack.isEmpty() || stack.peek() == 'a';
     }
 }
 
