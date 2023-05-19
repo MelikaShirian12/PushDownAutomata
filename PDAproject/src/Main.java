@@ -15,7 +15,7 @@ public class Main {
             String input;
 
             switch (cmd) {
-                case "1" -> {
+                case "1" :
 
                     System.out.print("\u001B[36m" + "Enter the m and n seperated with ',' ; or \"back\" to return to the menu -> " + "\u001B[0m");
                     input = sc.nextLine();
@@ -33,9 +33,9 @@ public class Main {
                         System.out.print("\u001B[36m" + "Enter the m and n seperated with ',' ; or \"back\" to return to the menu -> " + "\u001B[0m");
                         input = sc.nextLine();
                     }
-                }
+                break;
 
-                case "2" -> {
+                case "2" :
                     System.out.print("\u001B[35m" + "Enter the string or \"back\" to return to the menu -> " + "\u001B[0m");
                     input = sc.nextLine();
                     while (!input.equals("back")) {
@@ -51,11 +51,13 @@ public class Main {
                         System.out.print("\u001B[35m" + "Enter the string or \"back\" to return to the menu -> " + "\u001B[0m");
                         input = sc.nextLine();
                     }
-                }
+                break;
             }
 
             System.out.print("\nSelect the command\n1) String generator\n2) String Checker\n3) exit\n-> ");
             cmd = sc.nextLine();
+
+
 
         }
     }
