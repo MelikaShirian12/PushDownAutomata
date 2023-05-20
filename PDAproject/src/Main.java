@@ -25,7 +25,7 @@ public class Main {
 
                         try {
                             System.out.println("\u001B[35m" + "The result of this language is: " + "\u001B[0m" + "\u001B[36m" +
-                                    PushDownAutomaton.stringGenerator(Integer.parseInt(arguments[0]), Integer.parseInt(arguments[1])) + "\u001B[0m");
+                                    PushDownAutomaton.string_generator(Integer.parseInt(arguments[0]), Integer.parseInt(arguments[1])) + "\u001B[0m");
 
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
@@ -41,10 +41,10 @@ public class Main {
                     while (!input.equals("back")) {
 
                         try {
-                            if (PushDownAutomaton.accept(input))
-                                System.out.println("\u001B[36m" + "The automata accepts this string" + "\u001B[0m");
+                            if (PushDownAutomaton.is_accepted(input))
+                                System.out.println("\n\u001B[36m" + "The automata" + "\u001B[35m" + " accepts " + "\u001B[36m" + "this string." + "\u001B[0m\n");
                             else
-                                System.out.println("\u001B[36m" + "The automata rejects this string" + "\u001B[0m");
+                                System.out.println("\n\u001B[36m" + "The automata" + "\u001B[35m" + " rejects " + "\u001B[36m" + "this string." + "\u001B[0m\n");
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
@@ -63,7 +63,7 @@ public class Main {
 }
 
 class PushDownAutomaton {
-    public static boolean accept(String input) {
+    public static boolean is_accepted(String input) {
         Stack<Character> stack = new Stack<>();
 
         int i = 0;
@@ -108,7 +108,7 @@ class PushDownAutomaton {
         return stack.isEmpty() || stack.peek() == 'a';
     }
 
-    public static String stringGenerator(int n, int m) throws Exception {
+    public static String string_generator(int n, int m) throws Exception {
         Stack<String> stack = new Stack<>();
 
         StringBuilder result = new StringBuilder();
